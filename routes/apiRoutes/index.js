@@ -26,7 +26,7 @@ fs.readFile('db/db.json','utf8', (err, data) => {
     });
 
     function updateDb() {
-        fs.writeFile('./db/db.json', JSON.stringify(notes, '\t'), err => {
+        fs.writeFile('db/db.json', JSON.stringify(notes, '\t'), err => {
             if (err) throw err;
             return true;
         });
