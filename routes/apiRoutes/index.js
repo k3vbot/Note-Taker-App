@@ -10,7 +10,10 @@ fs.readFile('db/db.json','utf8', (err, data) => {
     });
 
     router.post('/', (req, res) => {
-        let newNote = req.body;
+        let newNote = {
+            title:req.body.title,
+            text: req.body.text,
+        }
         notes.push(newNote);
         updateDb();
         return window.location.reload();
