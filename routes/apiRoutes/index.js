@@ -13,17 +13,13 @@ fs.readFile('db/db.json','utf8', (err, data) => {
         let newNote = req.body;
         notes.push(newNote);
         updateDb();
-        return console.log('Added new note: '+newNote.title);
+        return window.location.reload();
     });
 
-    router.get('/:id', (req, res) => {
+    router.get('/notes/:id', (req, res) => {
         res.json(notes[req.params.id]);
     });
 
-    router.delete('/:id', (req, res) => {
-        notes.splice(req.params.id, 1);
-        updateDb();
-    });
 
     function updateDb() {
         fs.writeFile('db/db.json', JSON.stringify(notes, '\t'), err => {
