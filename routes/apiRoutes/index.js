@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 const router = require('express').Router();
 
 fs.readFile('db/db.json','utf8', (err, data) => {
@@ -13,13 +14,14 @@ fs.readFile('db/db.json','utf8', (err, data) => {
         let newNote = {
             title:req.body.title,
             text: req.body.text,
+            id: uuidv4(),
         }
         notes.push(newNote);
         updateDb();
         return window.location.reload();
     });
 
-    router.get('/notes/:id', (req, res) => {
+    router.get('/api/notes', (req, res) => {
         res.json(notes[req.params.id]);
     });
 
